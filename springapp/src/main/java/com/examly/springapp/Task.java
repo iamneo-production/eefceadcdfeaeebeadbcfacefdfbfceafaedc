@@ -15,8 +15,7 @@ public class Task {
     private String taskDate;
     private String taskName;
     private String taskStatus;
-
-  
+    private String houseNo;
     public String getTaskId() {
         return taskId;
     }
@@ -47,6 +46,12 @@ public class Task {
     public void setTaskStatus(String taskStatus) {
         this.taskStatus = taskStatus;
     }
+    public String getHouseNo() {
+        return houseNo;
+    }
+    public void setHouseNo(String houseNo) {
+        this.houseNo = houseNo;
+    }
 
-    // Constructors, getters, and setters (You can use Lombok to simplify this)
+  
 }
