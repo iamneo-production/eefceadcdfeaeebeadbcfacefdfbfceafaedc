@@ -1,4 +1,4 @@
-package com.examly.springapp.task;
+package com.examly.springapp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +15,6 @@ public class Task {
 
     // Constructors, Getters, and Setters
 
-    // Constructors
     public Task() {
     }
 
@@ -27,7 +26,6 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    // Getters and Setters
     public Long getTaskId() {
         return taskId;
     }
@@ -68,4 +66,3 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 }
-
