@@ -33,7 +33,7 @@ public class TaskController {
     }
 
     @GetMapping("/deleteTask")
-    public ResponseEntity<Void> deleteTask(@RequestParam("id") String id) {
+    public ResponseEntity<Void> deleteTask(@RequestParam("taskId") String id) {
         taskService.deleteTask(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -45,7 +45,7 @@ public class TaskController {
     }
 
     @GetMapping("/getTask")
-    public ResponseEntity<Task> getTaskByTaskId(@RequestParam("id") String id) {
+    public ResponseEntity<Task> getTaskByTaskId(@RequestParam("taskId") String id) {
         Task task = taskService.getTaskByTaskId(id);
         if (task != null) {
             return new ResponseEntity<>(task, HttpStatus.OK);
