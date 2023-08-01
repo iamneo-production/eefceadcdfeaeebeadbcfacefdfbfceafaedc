@@ -1,20 +1,26 @@
 -------------------------------------------------------------------------------
 Test set: com.examly.springapp.SpringApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 6.393 s <<< FAILURE! - in com.examly.springapp.SpringApplicationTests
-test_case1  Time elapsed: 0.379 s  <<< FAILURE!
-java.lang.AssertionError: Status expected:<200> but was:<201>
-	at com.examly.springapp.SpringApplicationTests.test_case1(SpringApplicationTests.java:34)
+Tests run: 4, Failures: 3, Errors: 1, Skipped: 0, Time elapsed: 6.104 s <<< FAILURE! - in com.examly.springapp.SpringApplicationTests
+test_case1  Time elapsed: 0.314 s  <<< ERROR!
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.springframework.orm.jpa.JpaSystemException: could not execute statement; nested exception is org.hibernate.exception.GenericJDBCException: could not execute statement
+	at com.examly.springapp.SpringApplicationTests.test_case1(SpringApplicationTests.java:30)
+Caused by: org.springframework.orm.jpa.JpaSystemException: could not execute statement; nested exception is org.hibernate.exception.GenericJDBCException: could not execute statement
+	at com.examly.springapp.SpringApplicationTests.test_case1(SpringApplicationTests.java:30)
+Caused by: org.hibernate.exception.GenericJDBCException: could not execute statement
+	at com.examly.springapp.SpringApplicationTests.test_case1(SpringApplicationTests.java:30)
+Caused by: java.sql.SQLException: Field 'id' doesn't have a default value
+	at com.examly.springapp.SpringApplicationTests.test_case1(SpringApplicationTests.java:30)
 
-test_case2  Time elapsed: 0.158 s  <<< FAILURE!
+test_case2  Time elapsed: 0.2 s  <<< FAILURE!
 java.lang.AssertionError: No value at JSON path "$[*].houseNo"
 	at com.examly.springapp.SpringApplicationTests.test_case2(SpringApplicationTests.java:48)
 
-test_case3  Time elapsed: 0.026 s  <<< FAILURE!
+test_case3  Time elapsed: 0.01 s  <<< FAILURE!
 java.lang.AssertionError: Status expected:<200> but was:<400>
 	at com.examly.springapp.SpringApplicationTests.test_case3(SpringApplicationTests.java:62)
 
-test_case4  Time elapsed: 0.008 s  <<< FAILURE!
+test_case4  Time elapsed: 0.016 s  <<< FAILURE!
 java.lang.AssertionError: Status expected:<200> but was:<400>
 	at com.examly.springapp.SpringApplicationTests.test_case4(SpringApplicationTests.java:79)
 
