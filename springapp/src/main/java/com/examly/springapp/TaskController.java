@@ -1,12 +1,15 @@
 package com.examly.springapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class TaskController {
+
     private final TaskService taskService;
 
     @Autowired
@@ -15,32 +18,40 @@ public class TaskController {
     }
 
     @PostMapping("/saveTask")
-    public Task saveTask(@RequestBody Task task) {
-        return taskService.saveTask(task);
+    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
+        Task savedTask = taskService.saveTask(task);
+        return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 
     @GetMapping("/changeStatus")
-    public Task changeTaskStatus(@RequestParam Long id, @RequestParam String status) {
-        return taskService.changeTaskStatus(id, status);
+    public ResponseEntity<Task> changeTaskStatus(@RequestParam String id, @RequestParam String newStatus) {
+        Task updatedTask = taskService.changeTaskStatus(id, newStatus);
+        if (updatedTask != null) {
+            return new ResponseEntity<>(updatedTask, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/deleteTask")
-    public void deleteTask(@RequestParam Long id) {
+    public ResponseEntity<Void> deleteTask(@RequestParam String id) {
         taskService.deleteTask(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/alltasks")
-    public List<Task> getAllTasks() {
-        return taskService.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTasks() {
+        List<Task> tasks = taskService.getAllTasks();
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     @GetMapping("/getTask")
-    public Task getTaskById(@RequestParam Long id) {
-        return taskService.getTaskById(id);
-    }
-
-    @GetMapping("/getTaskByHolderName")
-    public List<Task> getTaskByHolderName(@RequestParam String holderName) {
-        return taskService.getTaskByHolderName(holderName);
+    public ResponseEntity<Task> getTaskByTaskId(@RequestParam String id) {
+        Task task = taskService.getTaskByTaskId(id);
+        if (task != null) {
+            return new ResponseEntity<>(task, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

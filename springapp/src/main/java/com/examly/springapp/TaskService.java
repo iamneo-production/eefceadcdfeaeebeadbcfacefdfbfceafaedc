@@ -7,6 +7,7 @@ import java.util.List;
 
 @Service
 public class TaskService {
+
     private final TaskRepository taskRepository;
 
     @Autowired
@@ -18,27 +19,27 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task changeTaskStatus(Long id, String status) {
-        Task task = taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + id));
-        task.setTaskStatus(status);
-        return taskRepository.save(task);
+    public Task changeTaskStatus(String taskId, String newStatus) {
+        Task task = taskRepository.findByTaskId(taskId);
+        if (task != null) {
+            task.setTaskStatus(newStatus);
+            taskRepository.save(task);
+        }
+        return task;
     }
 
-    public void deleteTask(Long id) {
-        taskRepository.deleteById(id);
+    public void deleteTask(String taskId) {
+        Task task = taskRepository.findByTaskId(taskId);
+        if (task != null) {
+            taskRepository.delete(task);
+        }
     }
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
-    public Task getTaskById(Long id) {
-        return taskRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Task not found with id: " + id));
-    }
-
-    public List<Task> getTaskByHolderName(String holderName) {
-        return taskRepository.findByTaskHolderName(holderName);
+    public Task getTaskByTaskId(String taskId) {
+        return taskRepository.findByTaskId(taskId);
     }
 }
