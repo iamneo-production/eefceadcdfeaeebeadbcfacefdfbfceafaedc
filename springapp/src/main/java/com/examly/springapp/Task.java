@@ -1,4 +1,3 @@
--- Active: 1690823349869@@127.0.0.1@3306@task
 package com.examly.springapp;
 
 import javax.persistence.Entity;
@@ -10,12 +9,19 @@ import javax.persistence.Id;
 public class Task {
 
     @Id
+
     private String taskId;
     private String taskHolderName;
     private String taskDate;
     private String taskName;
     private String taskStatus;
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getTaskId() {
         return taskId;
     }

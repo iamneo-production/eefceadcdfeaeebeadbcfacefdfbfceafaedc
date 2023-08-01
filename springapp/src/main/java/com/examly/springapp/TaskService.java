@@ -2,7 +2,6 @@ package com.examly.springapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -23,9 +22,9 @@ public class TaskService {
         Task task = taskRepository.findByTaskId(taskId);
         if (task != null) {
             task.setTaskStatus(newStatus);
-            taskRepository.save(task);
+            return taskRepository.save(task);
         }
-        return task;
+        return null; // Return null if the task with the given ID is not found
     }
 
     public void deleteTask(String taskId) {
