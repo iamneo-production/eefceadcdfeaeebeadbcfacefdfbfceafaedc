@@ -19,11 +19,11 @@ public class TaskController {
     @PostMapping("/saveTask")
     public ResponseEntity<Task> saveTask(@RequestBody Task task) {
         Task savedTask = taskService.saveTask(task);
-        return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedTask, HttpStatus.OK);
     }
 
     @GetMapping("/changeStatus")
-    public ResponseEntity<Task> changeTaskStatus(@RequestParam String id, @RequestParam String newStatus) {
+    public ResponseEntity<Task> changeTaskStatus(@RequestParam("id") String id, @RequestParam String newStatus) {
         Task updatedTask = taskService.changeTaskStatus(id, newStatus);
         if (updatedTask != null) {
             return new ResponseEntity<>(updatedTask, HttpStatus.OK);
@@ -33,7 +33,7 @@ public class TaskController {
     }
 
     @GetMapping("/deleteTask")
-    public ResponseEntity<Void> deleteTask(@RequestParam String id) {
+    public ResponseEntity<Void> deleteTask(@RequestParam("id") String id) {
         taskService.deleteTask(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -45,7 +45,7 @@ public class TaskController {
     }
 
     @GetMapping("/getTask")
-    public ResponseEntity<Task> getTaskByTaskId(@RequestParam String id) {
+    public ResponseEntity<Task> getTaskByTaskId(@RequestParam("id") String id) {
         Task task = taskService.getTaskByTaskId(id);
         if (task != null) {
             return new ResponseEntity<>(task, HttpStatus.OK);
@@ -54,3 +54,4 @@ public class TaskController {
         }
     }
 }
+
